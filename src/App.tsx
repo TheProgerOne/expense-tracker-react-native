@@ -1,28 +1,23 @@
 // App.tsx
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import OverviewScreen from './screens/OverviewScreen';
+import BottomMenu from './screens/BottomMenu';
 
-// Import your HomeScreen component
-import HomeScreen from './screens/HomeScreen';
+const Drawer = createDrawerNavigator();
 
-// Create the stack navigator
-const Stack = createNativeStackNavigator();
-
-export default function App() {
+const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Главный экран' }} />
-        {/* You can add more screens to the stack navigator here */}
-      </Stack.Navigator>
+      <Drawer.Navigator>
+        <Drawer.Screen name="Home" component={OverviewScreen} options={{ drawerLabel: 'Home' }} />
+        <Drawer.Screen name="BottomMenu" component={BottomMenu} options={{ drawerLabel: 'Bottom Menu' }} />
+      </Drawer.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  // You can define your styles here if needed
-});
+export default App;
