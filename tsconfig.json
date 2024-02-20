@@ -1,5 +1,6 @@
 {
   "extends": "expo/tsconfig.base",
+  "types":[],
   "compilerOptions": {
     "strict": true,
     "baseUrl": "./",
@@ -9,7 +10,8 @@
       "@/screens/*": ["src/screens/*"],
       "@/utils/*": ["src/utils/*"],
       "@/assets/*": ["src/assets/*"]
-    }
+    },
+    "typeRoots": ["node_modules/@types"]
   },
   "include": ["src/**/*"]
 }

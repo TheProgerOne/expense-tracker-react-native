@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import CurrentMonthYear from './CurrentMonthYear';
 
 const AccountsScreen = () => {
   return (
     <View style={styles.container}>
+         <CurrentMonthYear />
       <Text style={styles.title}>Accounts Screen</Text>
       {}
     </View>
