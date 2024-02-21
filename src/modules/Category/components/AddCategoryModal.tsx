@@ -1,3 +1,4 @@
+// ./src/modules/Category/components/AddCategoryModal.tsx
 import React, { useState } from 'react';
 import { Modal, View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
@@ -5,24 +6,26 @@ import { Picker } from '@react-native-picker/picker';
 interface Props {
   isVisible: boolean;
   onClose: () => void;
-  onSave: (category: { name: string; color: string }) => void;
+  onSave: (category: { name: string; color: string; iconName: string }) => void;
 }
 
 const colors = ['#600080', '#990099', '#009900', '#000099'];
+const iconNames = ['assessment', 'assessment', 'restaurant', 'local-grocery-store'];
 
 const AddCategoryModal: React.FC<Props> = ({ isVisible, onClose, onSave }) => {
-    const [categoryName, setCategoryName] = useState('');
-    const [categoryColor, setCategoryColor] = useState(colors[0]);
-  
-    const handleSave = () => {
-      if (!categoryName.trim()) {
-        alert('Please enter a valid category name.');
-        return;
-      }
-      onSave({ name: categoryName, color: categoryColor });
-      setCategoryName(''); 
-      onClose(); 
-    };
+  const [categoryName, setCategoryName] = useState('');
+  const [categoryColor, setCategoryColor] = useState(colors[0]);
+  const [iconName, setIconName] = useState(iconNames[0]);
+
+  const handleSave = () => {
+    if (!categoryName.trim()) {
+      alert('Please enter a valid category name.');
+      return;
+    }
+    onSave({ name: categoryName, color: categoryColor, iconName });
+    setCategoryName(''); 
+    onClose(); 
+  };
 
   return (
     <Modal visible={isVisible} animationType="slide" transparent={true}>
@@ -42,6 +45,15 @@ const AddCategoryModal: React.FC<Props> = ({ isVisible, onClose, onSave }) => {
           >
             {colors.map((color) => (
               <Picker.Item key={color} label={color} value={color} />
+            ))}
+          </Picker>
+          <Picker
+            selectedValue={iconName}
+            onValueChange={(itemValue: string) => setIconName(itemValue)}
+            style={styles.picker}
+          >
+            {iconNames.map((name) => (
+              <Picker.Item key={name} label={name} value={name} />
             ))}
           </Picker>
           <Button title="Save" onPress={handleSave} />
