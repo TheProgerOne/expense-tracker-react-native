@@ -3,9 +3,9 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import CategoriesScreen from '../modules/Category/CategoriesScreen';
-import TransactionsScreen from './TransactionsScreen';
-import OverviewScreen from './OverviewScreen';
-import AccountsScreen from './AccountsScreen';
+import TransactionsScreen from '../modules/Transactions/TransactionsScreen';
+import OverviewScreen from '../modules/Overview/OverviewScreen';
+import AccountsScreen from '../modules/Accounts/AccountsScreen';
 
 const Tab = createBottomTabNavigator();
 
