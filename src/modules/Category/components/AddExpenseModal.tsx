@@ -1,21 +1,24 @@
 // ./src/modules/Category/components/AddExpenseModal.tsx
 import React from 'react';
 import { View, Text, Modal, StyleSheet, TextInput, Button, TouchableWithoutFeedback, Alert } from 'react-native';
-
+import { Dispatch, SetStateAction } from 'react';
+import { CategoryItem } from '../types/CategoryItem';
 interface Props {
   isVisible: boolean;
   onClose: () => void;
+  onAddExpense: () => Promise<void>;
   newExpense: string;
-  setNewExpense: (expense: string) => void;
-  onAddExpense: () => void;
+  setNewExpense: Dispatch<SetStateAction<string>>;
+  onDeleteCategory: (category: CategoryItem) => Promise<void>; 
 }
 
 const AddExpenseModal: React.FC<Props> = ({
   isVisible,
   onClose,
+  onAddExpense,
   newExpense,
   setNewExpense,
-  onAddExpense
+  onDeleteCategory,
 }) => {
   const handleAddExpenseInternal = () => {
     if (newExpense.trim() === '' || isNaN(Number(newExpense))) {

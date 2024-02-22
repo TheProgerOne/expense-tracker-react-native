@@ -5,4 +5,4 @@ export type CategoryItem = {
   svg: { fill: string };
   category: string;
   iconName: string;
-};
+}
