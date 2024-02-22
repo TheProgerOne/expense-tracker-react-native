@@ -5,13 +5,13 @@ import PieChartComponent from './components/PieChartComponent';
 import CategoryItemComponent from './components/CategoryItem';
 import AddExpenseModal from './components/AddExpenseModal';
 import AddCategoryModal from './components/AddCategoryModal';
-import { CategoryItem } from './types/CategoryItem';
+import { CategoryItem } from './types/CategoryItem'; // Ensure this type is correctly defined
 import { styles } from './styles';
 
 const CategoriesScreen: React.FC = () => {
   const [data, setData] = useState<CategoryItem[]>([
     { key: 1, amount: 9051, svg: { fill: '#600080' }, category: 'Groceries', iconName: 'cart' },
-    { key: 2, amount: 6051, svg: { fill: '#990099' }, category: 'Entertainment', iconName: 'theater' }
+    { key: 2, amount: 6051, svg: { fill: '#990099' }, category: 'Entertainment', iconName: 'theater' },
   ]);
   const [modalVisible, setModalVisible] = useState(false);
   const [isAddCategoryModalVisible, setIsAddCategoryModalVisible] = useState(false);
@@ -26,8 +26,8 @@ const CategoriesScreen: React.FC = () => {
   const handleAddExpense = () => {
     const expenseValue = parseFloat(newExpense);
     if (!isNaN(expenseValue) && selectedCategory) {
-      const newData = data.map(item =>
-        item.key === selectedCategory.key ? { ...item, amount: item.amount + expenseValue } : item
+      const newData = data.map((item) =>
+        item.key === selectedCategory.key ? { ...item, amount: item.amount + expenseValue } : item,
       );
       setData(newData);
       setNewExpense('');
@@ -35,11 +35,11 @@ const CategoriesScreen: React.FC = () => {
     }
   };
 
-  const handleAddNewCategory = (category: { name: string; color: string, iconName: string }) => {
-    const newCategory = {
-      key: Date.now(), 
+  const handleAddNewCategory = (category: { name: string; color: string; iconName: string }) => {
+    const newCategory: CategoryItem = {
+      key: Date.now(), // Using current timestamp for unique key
       amount: 0,
-      svg: { fill: category.color },
+      svg: { fill: category.color }, // Using 'color' for the 'svg.fill' property
       category: category.name,
       iconName: category.iconName,
     };
