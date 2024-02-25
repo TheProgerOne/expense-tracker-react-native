@@ -4,5 +4,5 @@ export type CategoryItem = {
   amount: number;
   svg: { fill: string };
   category: string;
-  iconName: string;
+  iconName: any;
 }

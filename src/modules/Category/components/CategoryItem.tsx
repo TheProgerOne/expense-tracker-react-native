@@ -1,6 +1,4 @@
-// ./src/modules/Category/components/CategoryItem.tsx
-
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { CategoryItem as CategoryItemType } from '../types/CategoryItem';
 
@@ -9,19 +7,19 @@ interface Props {
   onPress: () => void;
 }
 
-const CategoryItem: React.FC<Props> = ({ item, onPress }) => {
+const CategoryItem = forwardRef<TouchableOpacity, Props>(({ item, onPress }, ref) => {
   const { svg, category, amount } = item;
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.category} accessibilityRole="button" accessibilityLabel={`Category ${category}`}>
+    <TouchableOpacity ref={ref} onPress={onPress} style={styles.category} accessibilityRole="button" accessibilityLabel={`Category ${category}`}>
       <View style={[styles.icon, { backgroundColor: svg.fill }]} />
       <Text style={styles.categoryLabel}>{category}</Text>
       <Text style={styles.categoryAmount}>{`${amount} T`}</Text>
     </TouchableOpacity>
   );
-};
+});
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({  
   category: {
     flexDirection: 'row',
     alignItems: 'center',

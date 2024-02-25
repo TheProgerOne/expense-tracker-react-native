@@ -9,7 +9,6 @@ import AddCategoryModal from './components/AddCategoryModal';
 import { CategoryItem } from './types/CategoryItem';
 import { styles } from './styles';
 import { addExpense, removeExpense, getExpenses } from './services/addexpenseserice'; // Обновлен импорт
-import{ Dispatch, SetStateAction } from 'react';
 
 
 const CategoriesScreen: React.FC = () => {
@@ -62,16 +61,6 @@ const CategoriesScreen: React.FC = () => {
     setIsAddCategoryModalVisible(false);
   };
 
-  const handleCategoryLongPress = async (category: CategoryItem) => {
-    await removeExpense(category.key);
-    setData(prevData => prevData.filter(item => item.key !== category.key));
-  };
-
-  const handleCategoryDelete = async (category: CategoryItem) => {
-    await removeExpense(category.key);
-    setData(prevData => prevData.filter(item => item.key !== category.key));
-  };
-
   const totalExpenses = data.reduce((acc, item) => acc + item.amount, 0);
 
   return (
@@ -89,7 +78,6 @@ const CategoriesScreen: React.FC = () => {
             key={item.key.toString()}
             onHandlerStateChange={({ nativeEvent }) => {
               if (nativeEvent.state === State.ACTIVE) {
-                handleCategoryLongPress(item);
               }
             }}
           >
@@ -108,12 +96,11 @@ const CategoriesScreen: React.FC = () => {
       </ScrollView>
       <AddExpenseModal
         isVisible={modalVisible}
-         onClose={() => setModalVisible(false)}
-  onAddExpense={handleAddExpense}
-  newExpense={newExpense}
-  setNewExpense={setNewExpense}
-  onDeleteCategory={handleCategoryDelete}
-/>
+        onClose={() => setModalVisible(false)}
+        onAddExpense={handleAddExpense}
+        newExpense={newExpense}
+        setNewExpense={setNewExpense}
+      />
       <AddCategoryModal
         isVisible={isAddCategoryModalVisible}
         onClose={() => setIsAddCategoryModalVisible(false)}
