@@ -1,16 +1,15 @@
 // ./src/modules/Category/components/AddCategoryModal.tsx
 import React, { useState } from 'react';
 import { Modal, View, Text, TextInput, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; // Assuming you're using Expo, or you can use any other icon library
+import { Ionicons } from '@expo/vector-icons';
 
-// Placeholder components, replace these with your actual implementations
 const ColorPicker = ({ selectedColor, onSelect }) => (
   <FlatList
     data={['#600080', '#990099', '#009900', '#000099','#CD5C5C','#ADFF2F','#FFC0CB','#4682B4','#FFF8DC']}
     horizontal
     keyExtractor={(item) => item}
     renderItem={({ item }) => (
-      <TouchableOpacity onPress={() => onSelect(item)} style={[styles.colorCircle, { backgroundColor: item }]} />
+      <TouchableOpacity onPress={() => onSelect(item)} style={[styles.colorCircle, { backgroundColor: item }, item === selectedColor ? styles.selectedColorCircle : null,]} />
     )}
   />
 );
@@ -84,6 +83,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
+  },
+  selectedColorCircle: {
+    borderColor: '#000',
+    borderWidth: 3, 
   },
   modalView: {
     margin: 20,
