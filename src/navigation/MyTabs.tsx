@@ -1,7 +1,7 @@
 // ./src/navigation/MyTabs.tsx
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons'; // Используем Ionicons для иконок
+import { Ionicons } from '@expo/vector-icons';
 import CategoriesScreen from '../modules/Category/CategoriesScreen';
 import TransactionsScreen from '../modules/Transactions/TransactionsScreen';
 import OverviewScreen from '../modules/Overview/OverviewScreen';
@@ -17,7 +17,7 @@ const MyTabs = () => {
         component={CategoriesScreen} 
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="apps-outline" size={size} color={color} /> // Иконка для "Categories"
+            <Ionicons name="apps-outline" size={size} color={color} />
           ),
         }}
       />
@@ -26,7 +26,7 @@ const MyTabs = () => {
         component={TransactionsScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="swap-vertical-outline" size={size} color={color} /> // Иконка для "Transactions"
+            <Ionicons name="swap-vertical-outline" size={size} color={color} /> 
           ),
         }}
       />
@@ -35,7 +35,7 @@ const MyTabs = () => {
         component={OverviewScreen} 
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="pie-chart-outline" size={size} color={color} /> // Иконка для "Overview"
+            <Ionicons name="pie-chart-outline" size={size} color={color} />
           ),
         }}
       />
@@ -44,7 +44,7 @@ const MyTabs = () => {
         component={AccountsScreen} 
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="wallet-outline" size={size} color={color} /> // Иконка для "Accounts"
+            <Ionicons name="wallet-outline" size={size} color={color} /> 
           ),
         }}
       />

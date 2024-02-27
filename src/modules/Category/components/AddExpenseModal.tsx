@@ -30,7 +30,8 @@ const AddExpenseModal: React.FC<Props> = ({
       await onAddExpense(); 
       const expenseItem: ExpenseHistoryItem = {
         id: Math.random().toString(),
-        amount: newExpense,
+        category: '',
+        amount: parseFloat(newExpense), 
         date: new Date(),
       };
       onAddExpenseSuccess(expenseItem); 

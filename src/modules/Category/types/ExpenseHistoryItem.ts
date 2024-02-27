@@ -1,6 +1,6 @@
 interface ExpenseHistoryItem {
     id: string;
-    amount: string;
+    category: string;
+    amount: number;     
     date: Date;
   }
-  
