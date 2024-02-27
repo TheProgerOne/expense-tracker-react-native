@@ -10,12 +10,14 @@ import { CategoryItem } from './types/CategoryItem';
 import { styles } from './styles';
 import { addExpense, getExpenses, deleteCategory } from './services/addexpenseserice';
 import DeleteCategoryModal from './components/DeleteCategoryModal';
+import { useFinancials } from '../../FinancialContext';
 
 
 const CategoriesScreen: React.FC = () => {
   const [data, setData] = useState<CategoryItem[]>([]);
   const [expenseHistory, setExpenseHistory] = useState<ExpenseHistoryItem[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const { setTotalExpenses } = useFinancials();
   const [isAddCategoryModalVisible, setIsAddCategoryModalVisible] = useState(false);
   const [isDeleteCategoryModalVisible, setIsDeleteCategoryModalVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<CategoryItem | null>(null);
@@ -27,13 +29,15 @@ const CategoriesScreen: React.FC = () => {
       const now = new Date();
       const currentMonth = now.getMonth();
       const currentYear = now.getFullYear();
+      
       if (expensesData) {
         const filteredExpenses = expensesData.filter(expense => {
           const expenseDate = new Date(expense.date);
           return expenseDate.getMonth() === currentMonth && expenseDate.getFullYear() === currentYear;
+          
         });
-
         setData(filteredExpenses);
+        
       }
     };
 
@@ -91,6 +95,7 @@ const CategoriesScreen: React.FC = () => {
   };
 
   const totalExpenses = data.reduce((acc, item) => acc + item.amount, 0);
+  setTotalExpenses(totalExpenses);
 
   const now = new Date();
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

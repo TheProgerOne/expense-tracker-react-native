@@ -9,10 +9,12 @@ import { CategoryItem } from './types/CategoryItem';
 import { styles } from './styles';
 import { addIncome, getIncomes, deleteIncome } from './services/incomeService';
 import DeleteCategoryModal from './components/DeleteCategoryModal';
+import { useFinancials } from '../../FinancialContext';
 
 const IncomesScreen: React.FC = () => {
   const [data, setData] = useState<CategoryItem[]>([]);
   const [incomeHistory, setIncomeHistory] = useState<IncomeHistoryItem[]>([]);
+  const { setTotalIncomes } = useFinancials();
   const [modalVisible, setModalVisible] = useState(false);
   const [isAddCategoryModalVisible, setIsAddCategoryModalVisible] = useState(false);
   const [isDeleteCategoryModalVisible, setIsDeleteCategoryModalVisible] = useState(false);
@@ -88,7 +90,7 @@ const IncomesScreen: React.FC = () => {
   };
 
   const totalIncomes = data.reduce((acc, item) => acc + item.amount, 0);
-
+  setTotalIncomes(totalIncomes);
   const now = new Date();
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const currentMonthName = monthNames[now.getMonth()];
