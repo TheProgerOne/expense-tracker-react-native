@@ -26,7 +26,7 @@ const IconGridPicker = ({ selectedIcon, onSelect }) => (
     keyExtractor={(item) => item}
     renderItem={({ item }) => (
       <TouchableOpacity onPress={() => onSelect(item)}>
-        <Ionicons name={item} size={30} style={selectedIcon === item ? styles.selectedIcon : styles.icon} />
+        <Ionicons name={item as any} size={30} style={selectedIcon === item ? styles.selectedIcon : styles.icon} />
       </TouchableOpacity>
     )}
   />

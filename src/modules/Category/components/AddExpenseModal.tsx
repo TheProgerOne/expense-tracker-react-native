@@ -7,6 +7,7 @@ interface Props {
   isVisible: boolean;
   onClose: () => void;
   onAddExpense: () => Promise<void>;
+  onAddExpenseSuccess: (newExpense: ExpenseHistoryItem) => void;
   newExpense: string;
   setNewExpense: Dispatch<SetStateAction<string>>;
 }
@@ -15,15 +16,28 @@ const AddExpenseModal: React.FC<Props> = ({
   isVisible,
   onClose,
   onAddExpense,
+  onAddExpenseSuccess,
   newExpense,
   setNewExpense,
 }) => {
-  const handleAddExpenseInternal = () => {
+  const handleAddExpenseInternal = async () => {
     if (newExpense.trim() === '' || isNaN(Number(newExpense))) {
       Alert.alert('Invalid Input', 'Please enter a valid number.');
       return;
     }
-    onAddExpense();
+
+    try {
+      await onAddExpense(); 
+      const expenseItem: ExpenseHistoryItem = {
+        id: Math.random().toString(),
+        amount: newExpense,
+        date: new Date(),
+      };
+      onAddExpenseSuccess(expenseItem); 
+      onClose();
+    } catch (error) {
+      Alert.alert('Error', 'Failed to add expense.');
+    }
   };
 
   return (
@@ -55,7 +69,7 @@ const AddExpenseModal: React.FC<Props> = ({
       </TouchableWithoutFeedback>
     </Modal>
   );
-};  
+};
 
 const styles = StyleSheet.create({
   centeredView: {

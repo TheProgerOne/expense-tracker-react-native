@@ -14,6 +14,7 @@ import DeleteCategoryModal from './components/DeleteCategoryModal';
 
 const CategoriesScreen: React.FC = () => {
   const [data, setData] = useState<CategoryItem[]>([]);
+  const [expenseHistory, setExpenseHistory] = useState<ExpenseHistoryItem[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [isAddCategoryModalVisible, setIsAddCategoryModalVisible] = useState(false);
   const [isDeleteCategoryModalVisible, setIsDeleteCategoryModalVisible] = useState(false);
@@ -61,6 +62,10 @@ const CategoriesScreen: React.FC = () => {
       setNewExpense('');
       setModalVisible(false);
     }
+  };
+
+  const handleAddExpenseSuccess = (newExpenseItem: ExpenseHistoryItem) => {
+    setExpenseHistory(prevHistory => [...prevHistory, newExpenseItem]);
   };
 
   const handleAddNewCategory = async (category: { name: string; color: string; iconName: string }) => {
@@ -117,6 +122,7 @@ const CategoriesScreen: React.FC = () => {
         onClose={() => setModalVisible(false)}
         onAddExpense={handleAddExpense}
         newExpense={newExpense}
+        onAddExpenseSuccess={handleAddExpenseSuccess}
         setNewExpense={setNewExpense}
       />
       <AddCategoryModal
