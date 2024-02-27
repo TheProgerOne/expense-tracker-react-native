@@ -1,20 +1,22 @@
 // ./src/modules/Category/CategoriesScreen.tsx
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
-import { LongPressGestureHandler, State } from 'react-native-gesture-handler'; // Импортируем необходимые компоненты
+import { LongPressGestureHandler, State } from 'react-native-gesture-handler'; 
 import PieChartComponent from './components/PieChartComponent';
 import CategoryItemComponent from './components/CategoryItem';
 import AddExpenseModal from './components/AddExpenseModal';
 import AddCategoryModal from './components/AddCategoryModal';
 import { CategoryItem } from './types/CategoryItem';
 import { styles } from './styles';
-import { addExpense, removeExpense, getExpenses } from './services/addexpenseserice'; // Обновлен импорт
+import { addExpense, getExpenses, deleteCategory } from './services/addexpenseserice';
+import DeleteCategoryModal from './components/DeleteCategoryModal';
 
 
 const CategoriesScreen: React.FC = () => {
   const [data, setData] = useState<CategoryItem[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [isAddCategoryModalVisible, setIsAddCategoryModalVisible] = useState(false);
+  const [isDeleteCategoryModalVisible, setIsDeleteCategoryModalVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<CategoryItem | null>(null);
   const [newExpense, setNewExpense] = useState('');
 
@@ -32,6 +34,19 @@ const CategoriesScreen: React.FC = () => {
   const handleCategoryPress = (category: CategoryItem) => {
     setSelectedCategory(category);
     setModalVisible(true);
+  };
+
+  const handleCategoryLongPress = (category: CategoryItem) => {
+    setSelectedCategory(category);
+    setIsDeleteCategoryModalVisible(true);
+  };
+
+  const handleDeleteCategory = async () => {
+    if (selectedCategory) {
+      await deleteCategory(selectedCategory.key);
+      setData(data.filter(item => item.key !== selectedCategory.key));
+      setIsDeleteCategoryModalVisible(false);
+    }
   };
 
   const handleAddExpense = async () => {
@@ -78,13 +93,16 @@ const CategoriesScreen: React.FC = () => {
             key={item.key.toString()}
             onHandlerStateChange={({ nativeEvent }) => {
               if (nativeEvent.state === State.ACTIVE) {
+                handleCategoryLongPress(item);
               }
             }}
           >
-            <CategoryItemComponent
-              item={item}
-              onPress={() => handleCategoryPress(item)}
-            />
+            <View>
+              <CategoryItemComponent
+                item={item}
+                onPress={() => handleCategoryPress(item)}
+              />
+            </View>
           </LongPressGestureHandler>
         ))}
         <TouchableOpacity
@@ -105,6 +123,12 @@ const CategoriesScreen: React.FC = () => {
         isVisible={isAddCategoryModalVisible}
         onClose={() => setIsAddCategoryModalVisible(false)}
         onSave={handleAddNewCategory}
+      />
+      <DeleteCategoryModal // Add the DeleteCategoryModal here
+        isVisible={isDeleteCategoryModalVisible}
+        onClose={() => setIsDeleteCategoryModalVisible(false)}
+        onDeleteCategory={handleDeleteCategory}
+        categoryName={selectedCategory ? selectedCategory.category : ''}
       />
     </View>
   );
