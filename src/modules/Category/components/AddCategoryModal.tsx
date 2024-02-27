@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   closeButtonText: {
-    color: '##555',
+    color: '#5555',
   },
   colorCircle: {
     width: 40,

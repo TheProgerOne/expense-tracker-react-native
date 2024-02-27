@@ -22,6 +22,8 @@ const IncomesScreen: React.FC = () => {
   const [newIncome, setNewIncome] = useState('');
 
   useEffect(() => {
+    setTotalIncomes(totalIncomes);
+
     const loadIncomes = async () => {
       const incomesData = await getIncomes();
       const now = new Date();
@@ -158,6 +160,7 @@ const additionalStyles = StyleSheet.create({
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 10,
   },
   centeredView: {
     position: 'absolute',
@@ -167,7 +170,7 @@ const additionalStyles = StyleSheet.create({
   totalIncomesText: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: 'green', // Changed from red to green to reflect income
+    color: 'green',
   },
 });
 
