@@ -124,7 +124,7 @@ const CategoriesScreen: React.FC = () => {
         onClose={() => setIsAddCategoryModalVisible(false)}
         onSave={handleAddNewCategory}
       />
-      <DeleteCategoryModal // Add the DeleteCategoryModal here
+      <DeleteCategoryModal
         isVisible={isDeleteCategoryModalVisible}
         onClose={() => setIsDeleteCategoryModalVisible(false)}
         onDeleteCategory={handleDeleteCategory}
