@@ -24,6 +24,8 @@ const CategoriesScreen: React.FC = () => {
   const [newExpense, setNewExpense] = useState('');
 
   useEffect(() => {
+    setTotalExpenses(totalExpenses);
+
     const loadExpenses = async () => {
       const expensesData = await getExpenses();
       const now = new Date();
@@ -164,6 +166,7 @@ const additionalStyles = StyleSheet.create({
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 10,
   },
   centeredView: {
     position: 'absolute',
