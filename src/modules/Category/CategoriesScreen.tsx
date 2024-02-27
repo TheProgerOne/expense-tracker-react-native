@@ -24,8 +24,16 @@ const CategoriesScreen: React.FC = () => {
   useEffect(() => {
     const loadExpenses = async () => {
       const expensesData = await getExpenses();
+      const now = new Date();
+      const currentMonth = now.getMonth();
+      const currentYear = now.getFullYear();
       if (expensesData) {
-        setData(expensesData);
+        const filteredExpenses = expensesData.filter(expense => {
+          const expenseDate = new Date(expense.date);
+          return expenseDate.getMonth() === currentMonth && expenseDate.getFullYear() === currentYear;
+        });
+
+        setData(filteredExpenses);
       }
     };
 
@@ -64,6 +72,7 @@ const CategoriesScreen: React.FC = () => {
     }
   };
 
+  
   const handleAddExpenseSuccess = (newExpenseItem: ExpenseHistoryItem) => {
     setExpenseHistory(prevHistory => [...prevHistory, newExpenseItem]);
   };
@@ -83,9 +92,14 @@ const CategoriesScreen: React.FC = () => {
 
   const totalExpenses = data.reduce((acc, item) => acc + item.amount, 0);
 
+  const now = new Date();
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const currentMonthName = monthNames[now.getMonth()];
+  const currentYear = now.getFullYear();
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Monthly Expenses</Text>
+       <Text style={styles.title}>Expenses for {currentMonthName} {currentYear}</Text>
       <View style={additionalStyles.chartContainer}>
         <PieChartComponent data={data} />
         <View style={additionalStyles.centeredView}>

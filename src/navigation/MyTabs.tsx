@@ -3,7 +3,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import CategoriesScreen from '../modules/Category/CategoriesScreen';
-import TransactionsScreen from '../modules/Transactions/TransactionsScreen';
+import IncomeScreen from '../modules/Transactions/IncomeScreen';
 import OverviewScreen from '../modules/Overview/OverviewScreen';
 import AccountsScreen from '../modules/Accounts/AccountsScreen';
 
@@ -22,8 +22,8 @@ const MyTabs = () => {
         }}
       />
       <Tab.Screen 
-        name="Transactions" 
-        component={TransactionsScreen}
+        name="Income" 
+        component={IncomeScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="swap-vertical-outline" size={size} color={color} /> 
