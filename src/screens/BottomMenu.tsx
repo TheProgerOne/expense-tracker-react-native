@@ -3,7 +3,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import CategoriesScreen from '../modules/Category/CategoriesScreen';
-import TransactionsScreen from '../modules/Transactions/TransactionsScreen';
+import TransactionsScreen from '../modules/Transactions/IncomeScreen';
 import OverviewScreen from '../modules/Overview/OverviewScreen';
 import AccountsScreen from '../modules/Accounts/AccountsScreen';
 
