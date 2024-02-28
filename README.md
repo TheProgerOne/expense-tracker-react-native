@@ -1,5 +1,4 @@
 # expense-tracker-react-native
-Creating a professional README for your open-source project, an Expense Tracker app built with React Native and Expo, is crucial for engaging the community, attracting contributors, and guiding users on how to use the app. Here's a detailed template you can customize for your project:
 
 ---
 
