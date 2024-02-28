@@ -61,11 +61,6 @@ We welcome contributions from the community, whether it's in the form of bug rep
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details.
 
-## Acknowledgments
-
-- React Native and Expo communities for the comprehensive documentation and resources.
-- [React Navigation](https://reactnavigation.org/) for the intuitive navigation system.
-- All the contributors who've helped make this project better.
 
 ---
 ## Screen
