@@ -29,7 +29,7 @@ Expense Tracker is an open-source mobile application developed using React Nativ
 1. Clone the repository:
 
 ```sh
-git clone https://github.com/yourusername/expense-tracker-react-native.git
+[git clone https://github.com/yourusername/expense-tracker-react-native.git](https://github.com/TheProgerOne/expense-tracker-react-native.git)
 ```
 
 2. Navigate to the project directory:
